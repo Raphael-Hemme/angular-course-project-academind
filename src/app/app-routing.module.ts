@@ -19,7 +19,7 @@ const appRoutes: Routes = [
         { path: ':id', component: RecipeDetailComponent},
         { path: ':id/edit', component: RecipeEditComponent }
     ] },
-    { path: 'shoppinglist', component: ShoppingListComponent }
+    { path: 'shoppinglist', component: ShoppingListComponent, pathMatch: 'full' }
 ];
 
 @NgModule({
