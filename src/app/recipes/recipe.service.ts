@@ -11,7 +11,7 @@ export class RecipeService {
 
     recipesChanged = new Subject<Recipe[]>();
 
-    private recipes: Recipe[] = [
+/*     private recipes: Recipe[] = [
         new Recipe('Chef\'s Salad',
             'There is no salad like a chef\'s salad with a tasty chef and lots of tomatos and even the chef\'s dress.',
             'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80',
@@ -29,9 +29,16 @@ export class RecipeService {
                 new Ingredient('Teriaki Sauce', 1),
                 new Ingredient('Noodles', 1)
             ])
-      ];
+      ]; */
+
+    private recipes: Recipe[] = [];
 
     constructor(private shoppingListService: ShoppingListService) {};
+
+    setRecipes(recipes: Recipe[]) {
+        this.recipes = recipes;
+        this.recipesChanged.next(this.recipes.slice());
+    }
 
     getRecipes() {
         return this.recipes.slice();

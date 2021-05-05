@@ -9,6 +9,7 @@ import { RecipesComponent } from "./recipes/recipes.component";
 import { PromptForSelectionComponent } from './recipes/prompt-for-selection/prompt-for-selection.component';
 import { RecipeDetailComponent } from "./recipes/recipe-detail/recipe-detail.component";
 import { RecipeEditComponent } from "./recipes/recipe-edit/recipe-edit.component";
+import { RecipesResolverService } from "./recipes/recipe-resolver.service";
 
 
 const appRoutes: Routes = [
@@ -16,8 +17,8 @@ const appRoutes: Routes = [
     { path: 'recipes', component: RecipesComponent, children: [
         { path: '', component: PromptForSelectionComponent },
         { path: 'new', component: RecipeEditComponent },
-        { path: ':id', component: RecipeDetailComponent},
-        { path: ':id/edit', component: RecipeEditComponent }
+        { path: ':id', component: RecipeDetailComponent, resolve: [RecipesResolverService] },
+        { path: ':id/edit', component: RecipeEditComponent, resolve: [RecipesResolverService] }
     ] },
     { path: 'shoppinglist', component: ShoppingListComponent, pathMatch: 'full' }
 ];
