@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
 import { exhaustMap, map, take, tap } from 'rxjs/operators';
+import { environment } from "src/environments/environment";
 import { AuthService } from "../auth/auth.service";
 
 import { Recipe } from "../recipes/recipe.model";
@@ -11,8 +12,6 @@ import { RecipeService } from "../recipes/recipe.service";
     providedIn: 'root'
 })
 export class DataStorageService {
-
-    endpoint = 'take_your_own_endpoint'
 
     constructor(
         private http: HttpClient,
@@ -24,7 +23,7 @@ export class DataStorageService {
         const recipes = this.recipeService.getRecipes();
         this.http
             .put(
-                this.endpoint,
+                environment.firebaseEndpoint,
                 recipes
             )
             .subscribe(
@@ -35,7 +34,7 @@ export class DataStorageService {
 
     fetchRecipes() {
         return this.http
-            .get<Recipe[]>(this.endpoint)
+            .get<Recipe[]>(environment.firebaseEndpoint)
             .pipe(
                 map(recipes => {
                     return recipes.map(recipe => {
